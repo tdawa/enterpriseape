@@ -26,4 +26,4 @@ de Finibus Bonorum et **Malorum**
 2. Performance
 3. Precision
 
-Here is a small ruby code `'puts 'hello'`
+Here is a small ruby code `puts 'hello'`
