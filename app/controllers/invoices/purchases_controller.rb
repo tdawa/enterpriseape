@@ -20,6 +20,8 @@ class Invoices::PurchasesController < ApplicationController
 
   # GET /purchases/1/edit
   def edit
+    @invoice = Invoice.find(params[:invoice_id])
+    @purchase = Purchase.find(params[:id])
   end
 
   # POST /purchases
@@ -43,13 +45,17 @@ class Invoices::PurchasesController < ApplicationController
   # PATCH/PUT /purchases/1
   # PATCH/PUT /purchases/1.json
   def update
+    @invoice = Invoice.find(params[:invoice_id])
+    @purchase = Purchase.find(params[:id])
+    @purchase.invoice = @invoice
+
     respond_to do |format|
       if @purchase.update(purchase_params)
-        format.html { redirect_to @purchase, notice: 'Purchase was successfully updated.' }
-        format.json { render :show, status: :ok, location: @purchase }
+        format.html { redirect_to @invoice, notice: 'Purchase was successfully updated.' }
+        format.json { render :show, status: :ok, location: @invoice }
       else
         format.html { render :edit }
-        format.json { render json: @purchase.errors, status: :unprocessable_entity }
+        format.json { render json: @invoice.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -60,7 +66,7 @@ class Invoices::PurchasesController < ApplicationController
     @invoice = Invoice.find(params[:invoice_id])
     @purchase = Purchase.find(params[:id])
     title = @purchase.name
-    
+
     if @purchase.destroy
       flash[:notice] = "\"#{title}\" was deleted successfully."
       redirect_to @invoice
