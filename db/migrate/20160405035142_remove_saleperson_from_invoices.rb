@@ -1,5 +1,5 @@
 class RemoveSalepersonFromInvoices < ActiveRecord::Migration
   def change
-    remove_column :invoices, :saleperson, :string
+    remove_colum :invoices, :salesperson, :string
   end
 end
